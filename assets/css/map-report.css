@@ -1,0 +1,1036 @@
+/* ==========================================
+   CITYSENSE — REPORT MAP INTERFACE
+========================================== */
+
+.report-page-main {
+    max-width: 1700px;
+}
+
+.report-intro h1 span,
+.report-section-heading h2 span {
+    color: #829e50;
+}
+
+/* WORKSPACE */
+
+.report-workspace {
+    display: grid;
+    grid-template-columns: 315px minmax(0, 1fr);
+    min-height: 700px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e1e6dc;
+    border-radius: 10px;
+    box-shadow: 0 25px 70px rgba(16,28,41,.07);
+}
+
+/* FERRAMENTAS */
+
+.report-tools {
+    min-width: 0;
+    padding: 27px 20px;
+    background: #fff;
+    border-right: 1px solid #e7ebe3;
+}
+
+.report-step {
+    color: #84936f;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+}
+
+.report-tools-heading h2 {
+    margin: 12px 0 8px;
+    font-family: "Manrope", sans-serif;
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -.8px;
+}
+
+.report-tools-heading p {
+    margin: 0 0 23px;
+    color: #78847d;
+    font-size: 12px;
+    line-height: 1.75;
+}
+
+.report-marker-list {
+    display: grid;
+    gap: 8px;
+}
+
+.report-marker-tool {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+    padding: 12px 10px;
+    background: white;
+    border: 1px solid #e9ede6;
+    border-radius: 7px;
+    text-align: left;
+    cursor: grab;
+    transition:
+        border-color .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+}
+
+.report-marker-tool:hover,
+.report-marker-tool.is-selected {
+    background: #f7f9f3;
+    border-color: #b9d28d;
+    box-shadow: 0 5px 16px rgba(16,28,41,.045);
+}
+
+.report-marker-tool:active {
+    cursor: grabbing;
+}
+
+.report-marker-tool.is-selected {
+    box-shadow: inset 3px 0 #b9e769;
+}
+
+.report-tool-copy {
+    display: grid;
+    min-width: 0;
+    gap: 4px;
+}
+
+.report-tool-copy strong {
+    color: #182a36;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.report-tool-copy small {
+    color: #879189;
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+.report-tool-plus {
+    margin-left: auto;
+    color: #9ba69b;
+    font-size: 19px;
+    transition: color .2s, transform .2s;
+}
+
+.report-marker-tool:hover .report-tool-plus {
+    color: #6e8d43;
+    transform: rotate(90deg);
+}
+
+/* ALFINETE VISUAL */
+
+.report-pin {
+    --pin-color: #e85d4a;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    background: var(--pin-color);
+    border: 3px solid white;
+    border-radius: 50% 50% 50% 5px;
+    box-shadow: 0 3px 8px rgba(16,28,41,.16);
+    transform: rotate(-45deg);
+}
+
+.report-pin > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    border: 1px solid rgba(255,255,255,.8);
+    border-radius: 50%;
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    transform: rotate(45deg);
+}
+
+.pin-roads {
+    --pin-color: #e85d4a;
+}
+
+.pin-lighting {
+    --pin-color: #e8b83f;
+}
+
+.pin-water {
+    --pin-color: #3995dc;
+}
+
+.pin-sidewalks {
+    --pin-color: #ed8b45;
+}
+
+.pin-drainage {
+    --pin-color: #9265d8;
+}
+
+.pin-signs {
+    --pin-color: #78a94c;
+}
+
+.report-tool-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 13px;
+    background: #f3f5ef;
+    border: 1px solid #e9eee2;
+    border-radius: 6px;
+}
+
+.report-tip-icon {
+    color: #799b47;
+    font-size: 17px;
+}
+
+.report-tool-tip p {
+    margin: 0;
+    color: #77827a;
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+.report-tool-tip strong {
+    color: #35483a;
+}
+
+.report-selection {
+    margin-top: 15px;
+    padding: 13px;
+    background: #fbfcf8;
+    border: 1px dashed #cbd7bc;
+    border-radius: 6px;
+}
+
+.report-selection-label {
+    display: block;
+    margin-bottom: 7px;
+    color: #8b9782;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.report-selection strong {
+    display: block;
+    color: #26392d;
+    font-size: 11px;
+}
+
+.report-selection button {
+    margin-top: 10px;
+    padding: 0;
+    background: none;
+    border: 0;
+    color: #778b5b;
+    font-size: 10px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* MAPA */
+
+.report-map-panel {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: #f6f8f3;
+}
+
+.report-map-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 61px;
+    padding: 0 22px;
+    background: white;
+    border-bottom: 1px solid #e8ece5;
+}
+
+.report-map-toolbar > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.report-map-toolbar strong {
+    font-family: "Manrope", sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.report-map-toolbar strong span {
+    color: #879189;
+    font-weight: 500;
+}
+
+.report-map-live-dot {
+    width: 8px;
+    height: 8px;
+    background: #8dbb42;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(141,187,66,.13);
+}
+
+.report-map-provider {
+    padding: 7px 9px;
+    background: #f2f5ed;
+    border-radius: 3px;
+    color: #6e8154;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.report-map-instruction {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 42px;
+    padding: 0 22px;
+    background: #f8faF5;
+    border-bottom: 1px solid #e8ece5;
+    color: #77847a;
+    font-size: 10px;
+}
+
+.report-map-instruction > span {
+    color: #799b47;
+    font-size: 16px;
+}
+
+.report-map-canvas {
+    flex: 1;
+    width: 100%;
+    min-height: 540px;
+    cursor: crosshair;
+}
+
+.report-map-canvas .leaflet-container {
+    width: 100%;
+    height: 100%;
+    font-family: "DM Sans", sans-serif;
+}
+
+.report-map-canvas .leaflet-control-zoom {
+    margin: 16px !important;
+    overflow: hidden;
+    border: 1px solid rgba(16,28,41,.12) !important;
+    border-radius: 5px !important;
+    box-shadow: 0 4px 15px rgba(16,28,41,.12) !important;
+}
+
+.report-map-canvas .leaflet-control-zoom a {
+    width: 34px !important;
+    height: 34px !important;
+    line-height: 34px !important;
+    background: #101c29 !important;
+    border: 0 !important;
+    color: white !important;
+}
+
+.report-map-canvas .leaflet-control-zoom a:hover {
+    color: #b9e769 !important;
+}
+
+.report-map-canvas .leaflet-popup-content-wrapper {
+    border-radius: 6px;
+}
+
+.report-map-canvas .leaflet-popup-content {
+    font-family: "DM Sans", sans-serif;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.report-map-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 48px;
+    padding: 8px 18px;
+    background: white;
+    border-top: 1px solid #e8ece5;
+    color: #849087;
+    font-size: 10px;
+}
+
+.report-map-footer button {
+    padding: 7px 10px;
+    background: transparent;
+    border: 1px solid #e1e7dc;
+    border-radius: 4px;
+    color: #65745d;
+    font: inherit;
+    cursor: pointer;
+    transition: background .2s;
+}
+
+.report-map-footer button:hover {
+    background: #f1f5e9;
+}
+
+/* MARCADORES REAIS DO LEAFLET */
+
+.citysense-report-marker {
+    background: transparent;
+    border: 0;
+}
+
+.citysense-report-marker .report-pin {
+    transform: rotate(-45deg);
+    transition: filter .2s ease;
+}
+
+.citysense-report-marker:hover .report-pin {
+    filter: brightness(1.08);
+}
+
+.citysense-report-marker.marker-new .report-pin {
+    animation: reportMarkerPop .35s ease-out both;
+}
+
+@keyframes reportMarkerPop {
+    0% {
+        opacity: 0;
+        scale: .35;
+    }
+    75% {
+        scale: 1.15;
+    }
+    100% {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+/* GUIA DE CATEGORIAS */
+
+.report-legend-section {
+    padding-top: 85px;
+}
+
+.report-section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.report-section-heading h2 {
+    margin: 15px 0 10px;
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(29px, 4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -1.8px;
+}
+
+.report-section-heading p {
+    margin: 0;
+    color: #77827a;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.report-legend-count {
+    padding: 10px 12px;
+    background: #e9efdf;
+    border-radius: 4px;
+    color: #657b48;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.report-category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.report-category-card {
+    position: relative;
+    min-width: 0;
+    padding: 24px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid #e4e9df;
+    border-radius: 8px;
+    transition: border-color .25s, box-shadow .25s;
+}
+
+.report-category-card::after {
+    position: absolute;
+    right: -20px;
+    bottom: -45px;
+    width: 110px;
+    height: 110px;
+    content: "";
+    background: radial-gradient(circle, rgba(185,231,105,.13), transparent 70%);
+    pointer-events: none;
+}
+
+.report-category-card:hover {
+    border-color: #c9d9b1;
+    box-shadow: 0 15px 40px rgba(16,28,41,.06);
+}
+
+.report-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.report-card-index {
+    color: #b0b9ae;
+    font-family: "Manrope", sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.report-category-card h3 {
+    margin: 0 0 10px;
+    color: #182a36;
+    font-family: "Manrope", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -.4px;
+}
+
+.report-category-card > p {
+    min-height: 63px;
+    margin: 0;
+    color: #7b867e;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.report-card-example {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid #edf0eb;
+    color: #637064;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.report-card-example i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #b9e769;
+}
+
+/* FORMULÁRIO MODAL */
+
+.report-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.report-modal.is-open {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.report-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(8,18,27,.72);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+}
+
+.report-form-card {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 510px);
+    max-height: min(90vh, 850px);
+    overflow-y: auto;
+    padding: 35px;
+    background: #fbfcf8;
+    border: 1px solid rgba(255,255,255,.5);
+    border-radius: 10px;
+    box-shadow: 0 30px 100px rgba(0,0,0,.25);
+    opacity: 0;
+    transform: translateY(22px) scale(.98);
+}
+
+.report-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 17px;
+    width: 34px;
+    height: 34px;
+    background: #edf0e8;
+    border: 0;
+    border-radius: 50%;
+    color: #34443a;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.report-form-card h2 {
+    margin: 15px 0 9px;
+    font-family: "Manrope", sans-serif;
+    font-size: 30px;
+    line-height: 1.2;
+    letter-spacing: -1.2px;
+}
+
+.report-form-card h2 span {
+    color: #829e50;
+}
+
+.report-form-intro {
+    margin: 0 0 23px;
+    color: #7b867e;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.report-form-category {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 23px;
+    padding: 15px;
+    background: #f0f3e9;
+    border: 1px solid #e3e9d9;
+    border-radius: 6px;
+}
+
+.report-form-category > div {
+    display: grid;
+    gap: 5px;
+}
+
+.report-form-category small,
+.report-form-location small {
+    color: #86917f;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.report-form-category strong {
+    color: #293b30;
+    font-size: 12px;
+}
+
+#reportForm > label {
+    display: block;
+    margin: 15px 0 7px;
+    color: #35443a;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+#reportForm input,
+#reportForm textarea {
+    width: 100%;
+    padding: 12px 13px;
+    background: white;
+    border: 1px solid #dfe5da;
+    border-radius: 5px;
+    outline: none;
+    color: #20312a;
+    font: 12px "DM Sans", sans-serif;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+#reportForm input:focus,
+#reportForm textarea:focus {
+    border-color: #9dbd70;
+    box-shadow: 0 0 0 3px rgba(185,231,105,.18);
+}
+
+#reportForm textarea {
+    resize: vertical;
+    min-height: 105px;
+}
+
+.report-form-location {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 17px;
+    padding: 13px;
+    background: #f1f4ed;
+    border-radius: 5px;
+}
+
+.report-form-location > span {
+    color: #789a48;
+    font-size: 22px;
+}
+
+.report-form-location > div {
+    display: grid;
+    gap: 5px;
+    min-width: 0;
+}
+
+.report-form-location strong {
+    overflow-wrap: anywhere;
+    color: #455449;
+    font-size: 10px;
+}
+
+.report-form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.report-button-secondary,
+.report-button-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 44px;
+    padding: 0 15px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform .2s, background .2s;
+}
+
+.report-button-secondary {
+    background: white;
+    border: 1px solid #dfe5da;
+    color: #5f6e63;
+}
+
+.report-button-primary {
+    flex: 1;
+    background: #101c29;
+    border: 1px solid #101c29;
+    color: white;
+}
+
+.report-button-primary:hover {
+    background: #263b4b;
+}
+
+.report-button-primary span {
+    color: #b9e769;
+    font-size: 15px;
+}
+
+.report-button-secondary:hover,
+.report-button-primary:hover {
+    transform: translateY(-2px);
+}
+
+.report-form-disclaimer {
+    margin: 15px 0 0;
+    color: #929c91;
+    font-size: 9px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* TOAST */
+
+.report-toast {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 4000;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 15px 20px;
+    background: #101c29;
+    border: 1px solid rgba(185,231,105,.25);
+    border-radius: 7px;
+    box-shadow: 0 15px 45px rgba(16,28,41,.2);
+    color: white;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+}
+
+.report-toast.is-visible {
+    visibility: visible;
+}
+
+.report-toast > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #b9e769;
+    border-radius: 50%;
+    color: #101c29;
+    font-weight: 800;
+}
+
+.report-toast > div {
+    display: grid;
+    gap: 4px;
+}
+
+.report-toast strong {
+    font-size: 11px;
+}
+
+.report-toast small {
+    color: #b4c0c4;
+    font-size: 10px;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 1050px) {
+    .report-workspace {
+        grid-template-columns: 275px minmax(0, 1fr);
+    }
+
+    .report-category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .report-workspace {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .report-tools {
+        order: 2;
+        border-top: 1px solid #e7ebe3;
+        border-right: 0;
+    }
+
+    .report-map-panel {
+        order: 1;
+    }
+
+    .report-map-canvas {
+        min-height: 440px;
+    }
+
+    .report-marker-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .report-marker-tool {
+        gap: 8px;
+        padding: 10px 8px;
+    }
+
+    .report-tool-plus {
+        display: none;
+    }
+
+    .report-tool-copy strong {
+        font-size: 10px;
+    }
+
+    .report-tool-copy small {
+        font-size: 9px;
+    }
+
+    .report-section-heading {
+        align-items: flex-start;
+    }
+
+    .report-category-card {
+        padding: 18px;
+    }
+
+    .report-form-card {
+        padding: 28px 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .report-marker-list,
+    .report-category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .report-category-card > p {
+        min-height: 0;
+    }
+
+    .report-section-heading {
+        display: block;
+    }
+
+    .report-legend-count {
+        display: inline-block;
+        margin-top: 16px;
+    }
+
+    .report-map-toolbar {
+        padding: 0 13px;
+    }
+
+    .report-map-toolbar strong {
+        font-size: 10px;
+    }
+
+    .report-map-instruction {
+        padding: 0 13px;
+        font-size: 9px;
+    }
+
+    .report-map-canvas {
+        min-height: 390px;
+    }
+
+    .report-map-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        padding: 12px;
+    }
+
+    .report-form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .report-button-secondary,
+    .report-button-primary {
+        width: 100%;
+    }
+
+    .report-toast {
+        right: 12px;
+        bottom: 12px;
+        left: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .report-workspace *,
+    .report-legend-section *,
+    .report-modal *,
+    .report-toast * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+/* ==========================================
+   CITYSENSE — CLASSIFICAÇÃO DE OCORRÊNCIAS
+========================================== */
+
+/* Cores adicionais dos marcadores */
+
+.pin-sewage {
+    --pin-color: #9265d8;
+}
+
+.pin-electrical {
+    --pin-color: #b94b3e;
+}
+
+.pin-trees {
+    --pin-color: #43865a;
+}
+
+.pin-waste {
+    --pin-color: #657a53;
+}
+
+/* Campos dinâmicos do formulário */
+
+#reportForm select {
+    display: block;
+    width: 100%;
+    min-height: 43px;
+    padding: 10px 35px 10px 12px;
+    background-color: #fff;
+    border: 1px solid #dfe5da;
+    border-radius: 5px;
+    outline: none;
+    color: #20312a;
+    font-family: "DM Sans", sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+#reportForm select:focus {
+    border-color: #9dbd70;
+    box-shadow: 0 0 0 3px rgba(185,231,105,.18);
+}
+
+#reportForm select option {
+    background: white;
+    color: #20312a;
+}
+
+/* Evita rolagem do fundo com o modal aberto */
+
+body.report-modal-open {
+    overflow: hidden;
+}
+
+/* Cards selecionáveis */
+
+.report-category-card {
+    cursor: pointer;
+}
+
+.report-category-card:focus-visible {
+    outline: 2px solid #8dbb42;
+    outline-offset: 3px;
+}
+
+/* Acessibilidade e animações */
+
+.report-marker-tool:focus-visible,
+.report-modal-close:focus-visible,
+.report-button-primary:focus-visible,
+.report-button-secondary:focus-visible {
+    outline: 2px solid #8dbb42;
+    outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+    .report-map-canvas {
+        min-height: 440px;
+    }
+
+    .report-form-card {
+        width: min(100%, 510px);
+    }
+}
